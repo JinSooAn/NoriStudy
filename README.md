@@ -1,0 +1,2 @@
+# NoriStudy
+Ai Study
