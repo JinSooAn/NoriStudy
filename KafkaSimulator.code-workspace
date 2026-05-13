@@ -1,0 +1,104 @@
+{
+  "folders": [
+    {
+      "name": "kafka_Simul",
+      "path": "kafka_Simul"
+    }
+  ],
+  "settings": {
+    "terminal.integrated.env.windows": {
+      "PATH": "${env:USERPROFILE}\\.dotnet;${env:PATH}"
+    }
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch KafkaSimulator (Debug)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build-debug",
+        "program": "${workspaceFolder}/kafka_Simul/bin/Debug/net7.0-windows/KafkaSimulator.exe",
+        "args": [],
+        "cwd": "${workspaceFolder}/kafka_Simul",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+      },
+      {
+        "name": "Launch KafkaSimulator (Release)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build-release",
+        "program": "${workspaceFolder}/kafka_Simul/bin/Release/net7.0-windows/KafkaSimulator.exe",
+        "args": [],
+        "cwd": "${workspaceFolder}/kafka_Simul",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "build-debug",
+        "command": "${env:USERPROFILE}\\.dotnet\\dotnet.exe",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/kafka_Simul/KafkaSimulator.csproj",
+          "-c", "Debug"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": "build"
+      },
+      {
+        "label": "build-release",
+        "command": "${env:USERPROFILE}\\.dotnet\\dotnet.exe",
+        "type": "process",
+        "args": [
+          "build",
+          "${workspaceFolder}/kafka_Simul/KafkaSimulator.csproj",
+          "-c", "Release"
+        ],
+        "problemMatcher": "$msCompile",
+        "group": "build"
+      },
+      {
+        "label": "run-debug",
+        "command": "${env:USERPROFILE}\\.dotnet\\dotnet.exe",
+        "type": "process",
+        "args": [
+          "run",
+          "--project", "${workspaceFolder}/kafka_Simul/KafkaSimulator.csproj"
+        ],
+        "group": "test"
+      },
+      {
+        "label": "start-kafka",
+        "command": "docker-compose",
+        "type": "process",
+        "args": [
+          "up",
+          "-d"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/kafka_Simul"
+        },
+        "group": "test"
+      },
+      {
+        "label": "stop-kafka",
+        "command": "docker-compose",
+        "type": "process",
+        "args": [
+          "down"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/kafka_Simul"
+        },
+        "group": "test"
+      }
+    ]
+  }
+}
