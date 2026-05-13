@@ -1,0 +1,56 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "${env:USERPROFILE}\\.dotnet\\dotnet.exe",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/KafkaSimulator.csproj"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "build-debug",
+      "command": "${env:USERPROFILE}\\.dotnet\\dotnet.exe",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/KafkaSimulator.csproj",
+        "-c",
+        "Debug"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-release",
+      "command": "${env:USERPROFILE}\\.dotnet\\dotnet.exe",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/KafkaSimulator.csproj",
+        "-c",
+        "Release"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "run",
+      "command": "${workspaceFolder}/bin/Debug/net7.0-windows/KafkaSimulator.exe",
+      "type": "process",
+      "dependsOn": "build-debug",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}
