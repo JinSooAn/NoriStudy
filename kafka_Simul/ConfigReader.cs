@@ -18,7 +18,7 @@ public class ConfigReader
             throw new FileNotFoundException($"설정 파일을 찾을 수 없습니다: {filePath}");
         }
 
-        string? currentSection = null;
+        string currentSection = null;
         foreach (var line in File.ReadAllLines(filePath))
         {
             var trimmed = line.Trim();
